@@ -1,7 +1,4 @@
-require 'active_support/test_case'
-require 'active_support/log_subscriber/test_helper'
 require 'test_helper'
-require 'securerandom'
 
 describe SweetNotifications::Railtie do
   it 'has a railtie name' do
@@ -25,7 +22,7 @@ describe SweetNotifications::Railtie do
 
     it 'injects controller runtime to ActionController::Base' do
       log_subscriber = Class.new(SweetNotifications::LogSubscriber)
-      controller_runtime = SweetNotifications.controller_runtime('test', log_subscriber)
+      controller_runtime = SweetNotifications.controller_runtime('injection', log_subscriber)
       railtie = SweetNotifications.railtie('test', log_subscriber, controller_runtime)
       railtie.run_initializers
       assert_includes ActionController::Base.ancestors, controller_runtime

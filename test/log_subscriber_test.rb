@@ -1,7 +1,5 @@
-require 'active_support/test_case'
-require 'active_support/log_subscriber/test_helper'
 require 'test_helper'
-require 'securerandom'
+require 'active_support/log_subscriber/test_helper'
 
 describe SweetNotifications::LogSubscriber do
   include ActiveSupport::LogSubscriber::TestHelper

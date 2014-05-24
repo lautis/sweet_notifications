@@ -3,6 +3,8 @@ require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/pride'
 require 'sweet_notifications'
+require 'active_support/test_case'
+require 'securerandom'
 
 class ActiveSupport::TestCase
   class << self
