@@ -72,6 +72,15 @@ describe SweetNotifications::LogSubscriber do
       log_subscriber.no_runtime_event(event(duration: 10))
       assert_equal 5000.0, RuntimeLogSubscriber.runtime
     end
+
+    it 'does not log anything when not given block' do
+      class MuteLogSubscriber < SweetNotifications::LogSubscriber
+        event :mute_event, runtime: true, log_level: :info
+      end
+      log_subscriber = MuteLogSubscriber.new
+      log_subscriber.mute_event(event(duration: 5))
+      assert_equal [], @logger.logged(:info)
+    end
   end
 
   describe '#runtime' do

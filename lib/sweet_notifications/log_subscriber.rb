@@ -26,7 +26,7 @@ module SweetNotifications
       def event(command, log_level: :debug, runtime: true, &block)
         define_method command do |event|
           self.class.runtime += event.duration if runtime
-          send(log_level, block.call(event))
+          send(log_level, block.call(event)) if block
         end
       end
     end
