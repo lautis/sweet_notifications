@@ -34,11 +34,6 @@ describe SweetNotifications::ControllerRuntime do
   tests LogSubscribersController
 
   before do
-    @routes = ActionDispatch::Routing::RouteSet.new
-    @routes.draw do
-      resources :log_subscribers, controller: 'log_subscribers'
-    end
-    LogSubscribersController.send(:include, @routes.url_helpers)
     @old_logger = ActionController::Base.logger
     ActionController::LogSubscriber.attach_to :action_controller
   end
