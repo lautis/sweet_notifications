@@ -13,7 +13,7 @@ describe SweetNotifications::LogSubscriber do
                                             payload)
   end
 
-  describe '#event' do
+  describe '.event' do
     it 'creates event listener for event' do
       class LogSubscriber < SweetNotifications::LogSubscriber
         event :test
@@ -24,7 +24,7 @@ describe SweetNotifications::LogSubscriber do
     it 'proxies messages to Rails logger' do
       class LoggingLogSubscriber < SweetNotifications::LogSubscriber
         event :test_event do
-          'test, 1-2-3'
+          debug 'test, 1-2-3'
         end
       end
       log_subscriber = LoggingLogSubscriber.new
@@ -32,36 +32,10 @@ describe SweetNotifications::LogSubscriber do
       assert_equal ['test, 1-2-3'], @logger.logged(:debug)
     end
 
-    it 'uses given log level' do
-      class LeveledLogSubscriber < SweetNotifications::LogSubscriber
-        event :debug_event, log_level: :debug do
-          'debug'
-        end
-        event :info_event, log_level: :info do
-          'info'
-        end
-        event :warn_event, log_level: :warn do
-          'warn'
-        end
-      end
-      log_subscriber = LeveledLogSubscriber.new
-      log_subscriber.debug_event(event)
-      log_subscriber.info_event(event)
-      log_subscriber.warn_event(event)
-      assert_equal %w(debug), @logger.logged(:debug)
-      assert_equal %w(info), @logger.logged(:info)
-      assert_equal %w(warn), @logger.logged(:warn)
-    end
-
     it 'increments runtime when asked to' do
       class RuntimeLogSubscriber < SweetNotifications::LogSubscriber
-        event :runtime_event, runtime: true do
-          'debug'
-        end
-
-        event :no_runtime_event, runtime: false do
-          'info'
-        end
+        event :runtime_event, runtime: true
+        event :no_runtime_event, runtime: false
       end
 
       log_subscriber = RuntimeLogSubscriber.new
@@ -73,15 +47,16 @@ describe SweetNotifications::LogSubscriber do
 
     it 'does not log anything when not given block' do
       class MuteLogSubscriber < SweetNotifications::LogSubscriber
-        event :mute_event, runtime: true, log_level: :info
+        event :mute_event, runtime: true
       end
       log_subscriber = MuteLogSubscriber.new
       log_subscriber.mute_event(event(duration: 5))
       assert_equal [], @logger.logged(:info)
+      assert_equal [], @logger.logged(:debug)
     end
   end
 
-  describe '#runtime' do
+  describe '.runtime' do
     it 'can be incremented' do
       log_subscriber = Class.new(SweetNotifications::LogSubscriber)
       assert_equal 0, log_subscriber.runtime
@@ -99,7 +74,7 @@ describe SweetNotifications::LogSubscriber do
     end
   end
 
-  describe '#reset_runtime' do
+  describe '.reset_runtime' do
     before :each do
       @log_subscriber = Class.new(SweetNotifications::LogSubscriber)
       @log_subscriber.runtime = 2000
@@ -113,5 +88,45 @@ describe SweetNotifications::LogSubscriber do
       @log_subscriber.reset_runtime
       assert_equal 0, @log_subscriber.runtime
     end
+  end
+
+  describe '#message' do
+    class MessageLogSubscriber < SweetNotifications::LogSubscriber
+      color ActiveSupport::LogSubscriber::CYAN, ActiveSupport::LogSubscriber::MAGENTA
+    end
+
+    subject { MessageLogSubscriber.new }
+
+    it 'uses given colors for title' do
+      subject.colorize_logging = true
+      odd = subject.message(event(), 'Label', 'body')
+      even = subject.message(event(), 'Label', 'body')
+      assert_match ActiveSupport::LogSubscriber::CYAN, even
+      assert_match ActiveSupport::LogSubscriber::MAGENTA, odd
+    end
+
+    it 'uses only one color when alternate color is not defined' do
+      subject = Class.new(SweetNotifications::LogSubscriber) do
+        color ActiveSupport::LogSubscriber::CYAN
+      end.new
+      subject.colorize_logging = true
+      assert_match ActiveSupport::LogSubscriber::CYAN, subject.message(event(), 'Label', 'body')
+      assert_match ActiveSupport::LogSubscriber::CYAN, subject.message(event(), 'Label', 'body')
+    end
+
+    it 'alternates between bold and normal body text' do
+      subject.colorize_logging = true
+      odd = subject.message(event(), 'Label', 'body')
+      even = subject.message(event(), 'Label', 'body')
+      assert odd.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
+      assert !even.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
+    end
+
+    it 'does not use colors when setting is disabled' do
+      subject.colorize_logging = false
+      message = subject.message(event(), 'Label', 'body')
+      assert !message.include?(ActiveSupport::LogSubscriber::CYAN)
+    end
+
   end
 end

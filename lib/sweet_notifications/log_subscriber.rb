@@ -3,10 +3,17 @@ require 'securerandom'
 
 module SweetNotifications
   class LogSubscriber < ActiveSupport::LogSubscriber
-    def self.inherited(base)
-      base.class_eval do
-        @name ||= SecureRandom.hex
-      end
+    class_attribute :odd_color, :even_color
+
+    def message(event, label, body)
+      @odd = !@odd
+      label_color = @odd ? odd_color : even_color
+
+      "%s (%.2fms)  %s" % [
+        color(label, label_color, true),
+        event.duration,
+        color(body, nil, @odd)
+      ]
     end
 
     class << self
@@ -23,10 +30,22 @@ module SweetNotifications
         rt
       end
 
-      def event(command, log_level: :debug, runtime: true, &block)
+      # Set colors for logging title and duration
+      def color(even, odd = nil)
+        self.even_color = even
+        self.odd_color = odd || even
+      end
+
+      def event(command, runtime: true, &block)
         define_method command do |event|
           self.class.runtime += event.duration if runtime
-          send(log_level, block.call(event)) if block
+          instance_exec(event, &block) if block
+        end
+      end
+
+      def inherited(base)
+        base.class_eval do
+          @name ||= SecureRandom.hex
         end
       end
     end
