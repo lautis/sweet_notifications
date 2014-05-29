@@ -55,7 +55,7 @@ describe SweetNotifications do
       ActiveSupport::Notifications.instrument 'direct.sweet' do
         'ok'
       end
-      assert_match(/Direct \(0\.\d{2}ms\)  foo bar/, @logger.logged(:info)[0])
+      assert_match(/Direct \(\d\.\d{2}ms\)  foo bar/, @logger.logged(:info)[0])
     end
   end
 end
