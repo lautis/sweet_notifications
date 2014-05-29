@@ -30,7 +30,7 @@ describe SweetNotifications do
       ActiveSupport::Notifications.instrument 'test.sweet' do
         'ok'
       end
-      assert_match(/Test \(0\.\d{2}ms\)  blah blah/, @logger.logged(:info)[0])
+      assert_match(/Test \(\d\.\d{2}ms\)  blah blah/, @logger.logged(:info)[0])
     end
 
     it 'binds to current Rails app directly when the app is initialized' do
