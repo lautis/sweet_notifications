@@ -1,4 +1,4 @@
-# SweetNotifications
+# SweetNotifications [![Build Status](https://travis-ci.org/lautis/sweet_notifications.svg?branch=master)](https://travis-ci.org/lautis/sweet_notifications)
 
 Syntactic sugar for ActiveSupport::LogSubscriber for easy instrumentation and
 logging from third-party libraries.
