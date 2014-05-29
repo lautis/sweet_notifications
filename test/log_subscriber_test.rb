@@ -54,6 +54,19 @@ describe SweetNotifications::LogSubscriber do
       assert_equal [], @logger.logged(:info)
       assert_equal [], @logger.logged(:debug)
     end
+
+    it 'listens to events when attached to a namespace' do
+      class AttachedLogSubscriber < SweetNotifications::LogSubscriber
+        event :important_stuff, runtime: true do
+          info 'received!'
+        end
+      end
+      AttachedLogSubscriber.attach_to :namespace
+      ActiveSupport::Notifications.instrument 'important_stuff.namespace' do
+        'OK'
+      end
+      assert_equal ['received!'], @logger.logged(:info)
+    end
   end
 
   describe '.runtime' do
@@ -101,8 +114,8 @@ describe SweetNotifications::LogSubscriber do
       subject.colorize_logging = true
       odd = subject.message(event(), 'Label', 'body')
       even = subject.message(event(), 'Label', 'body')
-      assert_match ActiveSupport::LogSubscriber::CYAN, even
-      assert_match ActiveSupport::LogSubscriber::MAGENTA, odd
+      assert_match ActiveSupport::LogSubscriber::CYAN, odd
+      assert_match ActiveSupport::LogSubscriber::MAGENTA, even
     end
 
     it 'uses only one color when alternate color is not defined' do
@@ -118,8 +131,8 @@ describe SweetNotifications::LogSubscriber do
       subject.colorize_logging = true
       odd = subject.message(event(), 'Label', 'body')
       even = subject.message(event(), 'Label', 'body')
-      assert odd.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
-      assert !even.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
+      assert !odd.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
+      assert even.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
     end
 
     it 'does not use colors when setting is disabled' do

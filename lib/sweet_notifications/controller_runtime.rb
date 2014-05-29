@@ -2,9 +2,14 @@ require 'active_support/concern'
 require 'active_support/core_ext/module/attr_internal'
 
 module SweetNotifications
+  # Controller runtime tracking
   module ControllerRuntime
+    # Define a controller runtime logger for a LogSusbcriber
+    #
+    # @param name [String] title for logging
+    # @return [Module] controller runtime tracking mixin
     def controller_runtime(name, log_subscriber)
-      runtime_attr = "#{name.underscore}_runtime".to_sym
+      runtime_attr = "#{name.to_s.underscore}_runtime".to_sym
       Module.new do
         extend ActiveSupport::Concern
         attr_internal runtime_attr
