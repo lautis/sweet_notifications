@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = SweetNotifications::VERSION
   spec.authors       = ["Ville Lautanala"]
   spec.email         = ["lautis@gmail.com"]
-  spec.summary       = %q{A simple way to write ActiveSupport::LogSubscribers.}
-  spec.description   = %q{A simple way to write ActiveSupport::LogSubscribers to enable easy instrumentation and logging from third-party libraries in Rails apps.}
-  spec.homepage      = ""
+  spec.summary       = %q{Syntactic sugar for ActiveSupport::LogSubscriber.}
+  spec.description   = %q{Syntactic sugar for ActiveSupport::LogSubscriber for easy instrumentation and logging from third-party libraries.}
+  spec.homepage      = "https://github.com/lautis/sweet_notifications"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

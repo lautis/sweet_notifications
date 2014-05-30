@@ -3,9 +3,11 @@
 Syntactic sugar for ActiveSupport::LogSubscriber for easy instrumentation and
 logging from third-party libraries.
 
+This gem currently requires Ruby 2.0 or JRuby in 2.0 mode.
+
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your Rails application's Gemfile:
 
     gem 'sweet_notifications'
 
@@ -76,8 +78,8 @@ ActionController::Base.send(:include, ControllerRuntime)
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/sweet_notifications/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+See [CONTRIBUTING.md](https://raw.githubusercontent.com/lautis/sweet_notifications/master/CONTRIBUTING.md).
+
+## Copyright
+
+Copyright 2014 Ville Lautanala. Released under [the MIT license](https://github.com/lautis/uglifier/blob/master/LICENSE.txt).
