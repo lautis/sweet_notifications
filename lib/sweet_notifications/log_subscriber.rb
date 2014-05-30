@@ -1,3 +1,4 @@
+require 'active_support/log_subscriber'
 require 'request_store'
 require 'securerandom'
 
@@ -23,11 +24,12 @@ module SweetNotifications
       @odd = !@odd
       label_color = @odd ? odd_color : even_color
 
-      "  %s (%.2fms)  %s" % [
+      format(
+        '  %s (%.2fms)  %s',
         color(label, label_color, true),
         event.duration,
         color(body, nil, !@odd)
-      ]
+      )
     end
 
     class << self

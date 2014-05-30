@@ -22,10 +22,11 @@ describe SweetNotifications::Railtie do
 
     it 'injects controller runtime to ActionController::Base' do
       log_subscriber = Class.new(SweetNotifications::LogSubscriber)
-      controller_runtime = SweetNotifications.controller_runtime('injection', log_subscriber)
-      railtie = SweetNotifications.railtie('test', log_subscriber, controller_runtime)
+      runtime = SweetNotifications.controller_runtime('injection',
+                                                      log_subscriber)
+      railtie = SweetNotifications.railtie('test', log_subscriber, runtime)
       railtie.run_initializers
-      assert_includes ActionController::Base.ancestors, controller_runtime
+      assert_includes ActionController::Base.ancestors, runtime
     end
   end
 end

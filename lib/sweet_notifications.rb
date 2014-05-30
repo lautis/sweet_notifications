@@ -16,7 +16,8 @@ module SweetNotifications
   # initialized.
   #
   # @param name [Symbol] event namespace
-  # @return [Rails::Railtie, ActiveSupport::LogSubscriber] An array consisting of a Railtie and a LogSubscriber
+  # @return [Rails::Railtie, ActiveSupport::LogSubscriber] An array consisting
+  #   of a Railtie and a LogSubscriber
   # @yield event subscription
   #
   # ==== Examples
@@ -32,10 +33,10 @@ module SweetNotifications
     log_subscriber = Class.new(SweetNotifications::LogSubscriber, &block)
     controller_runtime = self.controller_runtime(name, log_subscriber)
     if Rails.try(:application).try(:initialized?)
-      self.initialize_rails(name, log_subscriber, controller_runtime)
+      initialize_rails(name, log_subscriber, controller_runtime)
       [nil, log_subscriber]
     else
-      [self.railtie(name, log_subscriber, controller_runtime), log_subscriber]
+      [railtie(name, log_subscriber, controller_runtime), log_subscriber]
     end
   end
 end

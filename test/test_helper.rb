@@ -19,8 +19,8 @@ class ActiveSupport::TestCase
   end
 
   extend MiniTest::Spec::DSL
-  register_spec_type /ControllerRuntime$/, ActionController::TestCase
-  register_spec_type self
+  register_spec_type(/ControllerRuntime$/, ActionController::TestCase)
+  register_spec_type(self)
 end
 
 module ActionController

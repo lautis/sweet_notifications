@@ -4,7 +4,8 @@ require 'active_support/log_subscriber/test_helper'
 describe SweetNotifications::LogSubscriber do
   include ActiveSupport::LogSubscriber::TestHelper
 
-  def event(name: 'Test', duration: 1, transaction_id: SecureRandom.hex, payload: {})
+  def event(name: 'Test', duration: 1, transaction_id: SecureRandom.hex,
+            payload: {})
     now = Time.now
     ActiveSupport::Notifications::Event.new(name,
                                             now,
@@ -105,15 +106,16 @@ describe SweetNotifications::LogSubscriber do
 
   describe '#message' do
     class MessageLogSubscriber < SweetNotifications::LogSubscriber
-      color ActiveSupport::LogSubscriber::CYAN, ActiveSupport::LogSubscriber::MAGENTA
+      color ActiveSupport::LogSubscriber::CYAN,
+            ActiveSupport::LogSubscriber::MAGENTA
     end
 
     subject { MessageLogSubscriber.new }
 
     it 'uses given colors for title' do
       subject.colorize_logging = true
-      odd = subject.message(event(), 'Label', 'body')
-      even = subject.message(event(), 'Label', 'body')
+      odd = subject.message(event, 'Label', 'body')
+      even = subject.message(event, 'Label', 'body')
       assert_match ActiveSupport::LogSubscriber::CYAN, odd
       assert_match ActiveSupport::LogSubscriber::MAGENTA, even
     end
@@ -123,21 +125,24 @@ describe SweetNotifications::LogSubscriber do
         color ActiveSupport::LogSubscriber::CYAN
       end.new
       subject.colorize_logging = true
-      assert_match ActiveSupport::LogSubscriber::CYAN, subject.message(event(), 'Label', 'body')
-      assert_match ActiveSupport::LogSubscriber::CYAN, subject.message(event(), 'Label', 'body')
+      assert_match(ActiveSupport::LogSubscriber::CYAN,
+                   subject.message(event, 'Label', 'body'))
+
+      assert_match(ActiveSupport::LogSubscriber::CYAN,
+                   subject.message(event, 'Label', 'body'))
     end
 
     it 'alternates between bold and normal body text' do
       subject.colorize_logging = true
-      odd = subject.message(event(), 'Label', 'body')
-      even = subject.message(event(), 'Label', 'body')
+      odd = subject.message(event, 'Label', 'body')
+      even = subject.message(event, 'Label', 'body')
       assert !odd.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
       assert even.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
     end
 
     it 'does not use colors when setting is disabled' do
       subject.colorize_logging = false
-      message = subject.message(event(), 'Label', 'body')
+      message = subject.message(event, 'Label', 'body')
       assert !message.include?(ActiveSupport::LogSubscriber::CYAN)
     end
 

@@ -23,7 +23,8 @@ module SweetNotifications
 
         define_method :cleanup_view_runtime do |&block|
           runtime_before_render = log_subscriber.reset_runtime
-          send("#{runtime_attr}=", (send(runtime_attr) || 0) + runtime_before_render)
+          send("#{runtime_attr}=",
+               (send(runtime_attr) || 0) + runtime_before_render)
           runtime = super(&block)
           runtime_after_render = log_subscriber.reset_runtime
           send("#{runtime_attr}=", send(runtime_attr) + runtime_after_render)
@@ -32,13 +33,16 @@ module SweetNotifications
 
         define_method :append_info_to_payload do |payload|
           super(payload)
-          payload[runtime_attr] = (send(runtime_attr) || 0) + log_subscriber.reset_runtime
+          runtime = (send(runtime_attr) || 0) + log_subscriber.reset_runtime
+          payload[runtime_attr] = runtime
         end
 
         const_set(:ClassMethods, Module.new do
           define_method :log_process_action do |payload|
             messages, runtime = super(payload), payload[runtime_attr]
-            messages << ("#{name}: %.1fms" % runtime.to_f) if runtime && runtime != 0
+            if runtime && runtime != 0
+              messages << format("#{name}: %.1fms", runtime.to_f)
+            end
             messages
           end
         end)

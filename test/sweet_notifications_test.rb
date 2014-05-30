@@ -3,16 +3,15 @@ require 'test_helper'
 describe SweetNotifications do
   include ActiveSupport::LogSubscriber::TestHelper
 
-
   describe '.subscribe' do
     it 'creates a railtie' do
-      railtie, _ = SweetNotifications.subscribe 'test_railtie_create' do
+      railtie, _ = SweetNotifications.subscribe 'railtie_create' do
       end
       assert railtie < Rails::Railtie
     end
 
     it 'initializes a log subscriber' do
-      _, log_subscriber = SweetNotifications.subscribe 'test_subscriber_create' do
+      _, log_subscriber = SweetNotifications.subscribe 'subscriber_create' do
         event :foo, runtime: true
       end
       assert log_subscriber < ActiveSupport::LogSubscriber
@@ -20,7 +19,7 @@ describe SweetNotifications do
     end
 
     it 'binds log subscriber to notifications' do
-      railtie, ls = SweetNotifications.subscribe 'sweet' do
+      railtie, _ = SweetNotifications.subscribe 'sweet' do
         event :test do |event|
           info message(event, 'Test', 'blah blah')
         end
@@ -40,7 +39,7 @@ describe SweetNotifications do
         end
       end
 
-      railtie, ls = SweetNotifications.subscribe 'sweet' do
+      railtie, _ = SweetNotifications.subscribe 'sweet' do
         event :direct do |event|
           info message(event, 'Direct', 'foo bar')
         end

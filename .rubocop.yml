@@ -1,0 +1,19 @@
+AllCops:
+  Exclude:
+    - sweet_notifications.gemspec
+    - lib/sweet_notifications/version.rb
+
+ClassAndModuleChildren:
+  Exclude:
+    - test/**/*.rb
+
+Documentation:
+  Include:
+    - lib/**/*.rb
+
+MethodLength:
+  Exclude:
+    - lib/sweet_notifications/controller_runtime.rb
+
+ModuleFunction:
+  Enabled: false
