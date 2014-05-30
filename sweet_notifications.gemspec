@@ -27,4 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.3"
   spec.add_development_dependency "yard", "~> 0.8.7"
   spec.add_development_dependency "appraisal"
+  spec.add_development_dependency "simplecov"
 end

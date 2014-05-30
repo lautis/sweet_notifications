@@ -1,4 +1,11 @@
 ENV['RAILS_ENV'] = 'test'
+require 'simplecov'
+
+SimpleCov.start do
+  add_filter 'test'
+  command_name 'Mintest'
+end
+
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/pride'
