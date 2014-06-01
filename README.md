@@ -55,7 +55,7 @@ the application is initialized.
 
 If this functionality is too much, use `SweetNotification::LogSubscriber` to
 create LogSusbcribers and `SweetNotification.controller_runtime` to bind this
-to a Rails controller logging.
+to the Rails controller logging runtime logging functionality.
 
 ```ruby
 class AwesomeLogSubscriber < SweetNotifications::LogSubscriber
