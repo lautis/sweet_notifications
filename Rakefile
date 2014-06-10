@@ -13,6 +13,6 @@ YARD::Rake::YardocTask.new do |t|
 end
 
 desc 'Check for code style'
-Rubocop::RakeTask.new
+RuboCop::RakeTask.new
 
 task default: [:test, :rubocop]
