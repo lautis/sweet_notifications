@@ -11,6 +11,8 @@ require 'minitest/spec'
 require 'minitest/pride'
 require 'sweet_notifications'
 require 'active_support/test_case'
+require 'action_controller'
+require 'active_support/log_subscriber/test_helper'
 require 'securerandom'
 
 class ActiveSupport::TestCase
@@ -19,6 +21,7 @@ class ActiveSupport::TestCase
   end
 
   extend MiniTest::Spec::DSL
+  register_spec_type(/SweetNotifications$/, ActionController::TestCase)
   register_spec_type(/ControllerRuntime$/, ActionController::TestCase)
   register_spec_type(self)
 end

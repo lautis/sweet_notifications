@@ -1,8 +1,3 @@
-require 'active_support/test_case'
-require 'active_support/log_subscriber'
-require 'active_support/log_subscriber/test_helper'
-require 'action_controller/log_subscriber'
-require 'action_controller'
 require 'test_helper'
 
 describe SweetNotifications::ControllerRuntime do

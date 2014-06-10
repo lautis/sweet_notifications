@@ -1,7 +1,17 @@
 require 'test_helper'
 
+class SweetNotificationsController < ActionController::Base
+  def index
+    ActiveSupport::Notifications.instrument 'test.controller' do
+      'ok'
+    end
+    render nothing: true
+  end
+end
+
 describe SweetNotifications do
   include ActiveSupport::LogSubscriber::TestHelper
+  tests SweetNotificationsController
 
   describe '.subscribe' do
     it 'creates a railtie' do
@@ -55,6 +65,21 @@ describe SweetNotifications do
         'ok'
       end
       assert_match(/Direct \(\d\.\d{2}ms\)  foo bar/, @logger.logged(:info)[0])
+    end
+
+    it 'logs to Rails logger' do
+      railtie, _ = SweetNotifications.subscribe 'controller', label: 'Label' do
+        event :test, runtime: true do |event|
+          info message(event, 'Test', 'logging')
+        end
+      end
+      railtie.run_initializers
+
+      get :index
+      wait
+      assert_match(/Test \(\d\.\d{2}ms\)  logging/, @logger.logged(:info)[0])
+      out = ActionController::Base.log_process_action(label_runtime: 1234)
+      assert_match(/Label: 1234\.0ms/, out[0])
     end
   end
 end

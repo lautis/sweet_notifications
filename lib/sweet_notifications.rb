@@ -16,6 +16,7 @@ module SweetNotifications
   # initialized.
   #
   # @param name [Symbol] event namespace
+  # @param label [String] optional label for logging
   # @return [Rails::Railtie, ActiveSupport::LogSubscriber] An array consisting
   #   of a Railtie and a LogSubscriber
   # @yield event subscription
@@ -29,9 +30,10 @@ module SweetNotifications
   #      debug message(event, event.payload[:name], event.payload[:sql])
   #    end
   #  end
-  def self.subscribe(name, &block)
+  def self.subscribe(name, label: nil, &block)
+    label ||= name
     log_subscriber = Class.new(SweetNotifications::LogSubscriber, &block)
-    controller_runtime = self.controller_runtime(name, log_subscriber)
+    controller_runtime = self.controller_runtime(label, log_subscriber)
     if Rails.try(:application).try(:initialized?)
       initialize_rails(name, log_subscriber, controller_runtime)
       [nil, log_subscriber]

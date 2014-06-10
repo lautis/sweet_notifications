@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'active_support/log_subscriber/test_helper'
 
 describe SweetNotifications::LogSubscriber do
   include ActiveSupport::LogSubscriber::TestHelper
