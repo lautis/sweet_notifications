@@ -7,6 +7,11 @@ module SweetNotifications
   class LogSubscriber < ActiveSupport::LogSubscriber
     class_attribute :odd_color, :even_color
 
+    def initialize
+      super
+      @odd = false
+    end
+
     # Format a message for logging
     #
     # @param event [ActiveSupport::Notifications::Event] subscribed event
