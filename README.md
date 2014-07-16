@@ -43,7 +43,7 @@ Then, subscribe to these notifications using SweetNotifications in an initialize
 SweetNotifications.subscribe :candies do
   color ActiveSupport::LogSubscriber::GREEN
   event :list, runtime: true do |event|
-    return unless logger.debug?
+    next unless logger.debug? # Use next in blocks
     debug message(event, 'Candy', "listing candies: #{event.payload[:candies]}")
   end
 end
