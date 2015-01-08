@@ -2,11 +2,12 @@ language: ruby
 gemfile:
   - gemfiles/rails_4.0.gemfile
   - gemfiles/rails_4.1.gemfile
+  - gemfiles/rails_4.2.gemfile
 rvm:
   - 2.0.0
   - 2.1.2
 matrix:
   include:
     - rvm: jruby
-      gemfile: gemfiles/rails_4.1.gemfile
+      gemfile: gemfiles/rails_4.2.gemfile
       env: JRUBY_OPTS="--2.0"
