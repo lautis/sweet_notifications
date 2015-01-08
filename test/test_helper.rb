@@ -17,7 +17,7 @@ require 'securerandom'
 
 class ActiveSupport::TestCase
   class << self
-    remove_method :describe
+    remove_method :describe if method_defined? :describe
   end
 
   extend MiniTest::Spec::DSL
