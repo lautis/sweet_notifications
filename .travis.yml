@@ -5,7 +5,8 @@ gemfile:
   - gemfiles/rails_4.2.gemfile
 rvm:
   - 2.0.0
-  - 2.1.2
+  - 2.1.5
+  - 2.2.0
 matrix:
   include:
     - rvm: jruby
