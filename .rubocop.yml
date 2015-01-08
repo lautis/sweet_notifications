@@ -2,6 +2,8 @@ AllCops:
   Exclude:
     - sweet_notifications.gemspec
     - lib/sweet_notifications/version.rb
+    - "vendor/**/*"
+    - "gemfiles/vendor/**/*"
 
 ClassAndModuleChildren:
   Exclude:
