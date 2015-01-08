@@ -144,6 +144,5 @@ describe SweetNotifications::LogSubscriber do
       message = subject.message(event, 'Label', 'body')
       assert !message.include?(ActiveSupport::LogSubscriber::CYAN)
     end
-
   end
 end

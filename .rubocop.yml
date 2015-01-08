@@ -17,3 +17,6 @@ MethodLength:
 
 ModuleFunction:
   Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
