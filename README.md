@@ -3,7 +3,8 @@
 Syntactic sugar for ActiveSupport::LogSubscriber for easy instrumentation and
 logging from third-party libraries.
 
-This gem currently requires Ruby 2.0 or JRuby in 2.0 mode.
+This gem requires Ruby 2.0 or newer. Compatible versions of JRuby and Rubinius
+are also supported.
 
 ## Installation
 
