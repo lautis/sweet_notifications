@@ -5,7 +5,7 @@ describe SweetNotifications::LogSubscriber do
 
   def event(name: 'Test', duration: 1, transaction_id: SecureRandom.hex,
             payload: {})
-    now = Time.now
+    now = Time.current
     ActiveSupport::Notifications::Event.new(name,
                                             now,
                                             now + duration,
