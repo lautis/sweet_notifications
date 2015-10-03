@@ -5,7 +5,12 @@ class SweetNotificationsController < ActionController::Base
     ActiveSupport::Notifications.instrument 'test.controller' do
       'ok'
     end
-    render nothing: true
+
+    if Gem.loaded_specs['rails'].version < Gem::Version.new('4.2')
+      render text: 'ok'
+    else
+      render plain: 'ok'
+    end
   end
 end
 

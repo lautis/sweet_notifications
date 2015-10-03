@@ -11,17 +11,27 @@ describe SweetNotifications::ControllerRuntime do
   class LogSubscribersController < ActionController::Base
     def create
       TestLogSubscriber.runtime += 100
-      render text: '100'
+      render_text '100'
     end
 
     def show
-      render text: '0'
+      render_text '0'
     end
 
     def destroy
       TestLogSubscriber.runtime += 50
-      render text: 'OK'
+      render_text 'OK'
       TestLogSubscriber.runtime += 5
+    end
+
+    private
+
+    def render_text(text)
+      if Gem.loaded_specs['rails'].version < Gem::Version.new('4.2')
+        render text: 'ok'
+      else
+        render plain: 'ok'
+      end
     end
   end
 
