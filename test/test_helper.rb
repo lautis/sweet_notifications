@@ -27,7 +27,9 @@ class ActiveSupport::TestCase
   register_spec_type(self)
 end
 
-ActiveSupport::TestCase.test_order = :random
+if ActiveSupport::TestCase.respond_to?(:test_order=)
+  ActiveSupport::TestCase.test_order = :random
+end
 
 module ActionController
   TestRoutes = ActionDispatch::Routing::RouteSet.new
