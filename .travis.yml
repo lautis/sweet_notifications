@@ -15,3 +15,7 @@ matrix:
     - rvm: jruby
       gemfile: gemfiles/rails_4.2.gemfile
       env: JRUBY_OPTS="--2.0"
+    - rvm: 2.2.3
+      gemfile: gemfiles/rails_head.gemfile
+  allow_failures:
+    - gemfile: gemfiles/rails_head.gemfile

@@ -20,10 +20,10 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '~> 2.0'
 
-  spec.add_runtime_dependency "activesupport", "~> 4.0"
+  spec.add_runtime_dependency "activesupport", ">= 4.0", "< 6"
   spec.add_runtime_dependency "request_store", "~> 1.0"
-  spec.add_runtime_dependency "railties", "~> 4.0"
-  spec.add_development_dependency "actionpack", "~> 4.0"
+  spec.add_runtime_dependency "railties", ">= 4.0", "< 6"
+  spec.add_development_dependency "actionpack", ">= 4.0", "< 6"
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "rake", "~> 10.3"
