@@ -5,7 +5,7 @@ class SweetNotificationsController < ActionController::Base
     ActiveSupport::Notifications.instrument 'test.controller' do
       'ok'
     end
-    render nothing: true
+    render html: 'ok'
   end
 end
 

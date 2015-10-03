@@ -11,16 +11,16 @@ describe SweetNotifications::ControllerRuntime do
   class LogSubscribersController < ActionController::Base
     def create
       TestLogSubscriber.runtime += 100
-      render text: '100'
+      render html: '100'
     end
 
     def show
-      render text: '0'
+      render html: '0'
     end
 
     def destroy
       TestLogSubscriber.runtime += 50
-      render text: 'OK'
+      render html: 'OK'
       TestLogSubscriber.runtime += 5
     end
   end
