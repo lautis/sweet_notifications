@@ -52,7 +52,8 @@ module SweetNotifications
       #
       # @return Numeric previous runtime value
       def reset_runtime
-        rt, self.runtime = runtime, 0
+        rt = runtime
+        self.runtime = 0
         rt
       end
 

@@ -3,7 +3,7 @@ require 'simplecov'
 
 SimpleCov.start do
   add_filter 'test'
-  command_name 'Mintest'
+  command_name 'Minitest'
 end
 
 require 'minitest/autorun'
@@ -26,6 +26,8 @@ class ActiveSupport::TestCase
   register_spec_type(/ControllerRuntime$/, ActionController::TestCase)
   register_spec_type(self)
 end
+
+ActiveSupport::TestCase.test_order = :random
 
 module ActionController
   TestRoutes = ActionDispatch::Routing::RouteSet.new

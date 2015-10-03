@@ -15,7 +15,7 @@ describe SweetNotifications do
 
   describe '.subscribe' do
     it 'creates a railtie' do
-      railtie, _ = SweetNotifications.subscribe 'railtie_create' do
+      railtie, = SweetNotifications.subscribe 'railtie_create' do
       end
       assert railtie < Rails::Railtie
     end
@@ -29,7 +29,7 @@ describe SweetNotifications do
     end
 
     it 'binds log subscriber to notifications' do
-      railtie, _ = SweetNotifications.subscribe 'sweet' do
+      railtie, = SweetNotifications.subscribe 'sweet' do
         event :test do |event|
           info message(event, 'Test', 'blah blah')
         end
@@ -49,7 +49,7 @@ describe SweetNotifications do
         end
       end
 
-      railtie, _ = SweetNotifications.subscribe 'sweet' do
+      railtie, = SweetNotifications.subscribe 'sweet' do
         event :direct do |event|
           info message(event, 'Direct', 'foo bar')
         end
@@ -68,7 +68,7 @@ describe SweetNotifications do
     end
 
     it 'logs to Rails logger' do
-      railtie, _ = SweetNotifications.subscribe 'controller', label: 'Label' do
+      railtie, = SweetNotifications.subscribe 'controller', label: 'Label' do
         event :test, runtime: true do |event|
           info message(event, 'Test', 'logging')
         end

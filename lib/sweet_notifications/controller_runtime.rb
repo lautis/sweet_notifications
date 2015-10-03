@@ -39,7 +39,8 @@ module SweetNotifications
 
         const_set(:ClassMethods, Module.new do
           define_method :log_process_action do |payload|
-            messages, runtime = super(payload), payload[runtime_attr]
+            messages = super(payload)
+            runtime = payload[runtime_attr]
             if runtime && runtime != 0
               messages << format("#{name}: %.1fms", runtime.to_f)
             end
