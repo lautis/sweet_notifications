@@ -1,10 +1,12 @@
 AllCops:
-  RunRailsCops: true
   Exclude:
     - sweet_notifications.gemspec
     - lib/sweet_notifications/version.rb
     - "vendor/**/*"
     - "gemfiles/vendor/**/*"
+
+Rails:
+  Enabled: true
 
 ClassAndModuleChildren:
   Exclude:
@@ -23,7 +25,3 @@ ModuleFunction:
 
 Metrics/AbcSize:
   Enabled: false
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: single_quotes
