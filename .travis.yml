@@ -24,4 +24,5 @@ matrix:
     - rvm: 2.3.0
       gemfile: gemfiles/rails_head.gemfile
   allow_failures:
+    - rvm: rbx-3
     - gemfile: gemfiles/rails_head.gemfile
