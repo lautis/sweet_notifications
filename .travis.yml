@@ -6,7 +6,6 @@ gemfile:
   - gemfiles/rails_4.1.gemfile
   - gemfiles/rails_4.2.gemfile
 rvm:
-  - '2.0'
   - '2.1'
   - '2.2'
   - 2.3.3
@@ -14,9 +13,6 @@ rvm:
   - jruby-9.1.7.0
 matrix:
   include:
-    - rvm: jruby
-      gemfile: gemfiles/rails_4.2.gemfile
-      env: JRUBY_OPTS="--2.0"
     - rvm: 2.3.0
       gemfile: gemfiles/rails_5.0.gemfile
     - rvm: 2.4.0
