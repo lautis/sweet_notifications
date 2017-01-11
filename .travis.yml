@@ -9,9 +9,9 @@ rvm:
   - '2.0'
   - '2.1'
   - '2.2'
-  - 2.3.0
-  - jruby-9.0.4.0
-  - rbx-3
+  - 2.3.3
+  - 2.4.0
+  - jruby-9.1.7.0
 matrix:
   include:
     - rvm: jruby
@@ -24,5 +24,4 @@ matrix:
     - rvm: 2.3.0
       gemfile: gemfiles/rails_head.gemfile
   allow_failures:
-    - rvm: rbx-3
     - gemfile: gemfiles/rails_head.gemfile
