@@ -6,7 +6,7 @@ class SweetNotificationsController < ActionController::Base
       'ok'
     end
 
-    if Gem.loaded_specs['rails'].version < Gem::Version.new('4.2')
+    if Gem.loaded_specs['rails'] && Gem.loaded_specs['rails'].version < Gem::Version.new('4.2')
       render text: 'ok'
     else
       render plain: 'ok'

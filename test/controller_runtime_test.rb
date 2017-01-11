@@ -27,7 +27,7 @@ describe SweetNotifications::ControllerRuntime do
     private
 
     def render_text(text)
-      if Gem.loaded_specs['rails'].version < Gem::Version.new('4.2')
+      if Gem.loaded_specs['rails'] && Gem.loaded_specs['rails'].version < Gem::Version.new('4.2')
         render text: text
       else
         render plain: text
