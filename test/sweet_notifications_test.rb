@@ -61,7 +61,8 @@ describe SweetNotifications do
         end
       end
 
-      assert_equal nil, railtie
+      assert_nil railtie
+
       module ::Rails
         class << self
           undef application
