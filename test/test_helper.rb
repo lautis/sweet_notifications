@@ -19,7 +19,7 @@ require 'securerandom'
 module RailsVersion
   extend self
   def rails_version?(constraint)
-    gem_spec = Gem.loaded_specs['actionview']
+    gem_spec = Gem.loaded_specs['actionpack']
     gem_spec && Gem::Requirement.new(constraint).satisfied_by?(gem_spec.version)
   end
 end

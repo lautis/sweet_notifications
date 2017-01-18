@@ -6,7 +6,7 @@ class SweetNotificationsController < ActionController::Base
       'ok'
     end
 
-    if rails_version?('~>4.1.0')
+    if rails_version?('< 4.2')
       render text: 'ok'
     else
       render plain: 'ok'

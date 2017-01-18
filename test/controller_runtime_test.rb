@@ -27,7 +27,7 @@ describe SweetNotifications::ControllerRuntime do
     private
 
     def render_text(text)
-      if rails_version?('~>4.1.0')
+      if rails_version?('< 4.2')
         render text: text
       else
         render plain: text
