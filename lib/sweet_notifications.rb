@@ -34,11 +34,19 @@ module SweetNotifications
     label ||= name
     log_subscriber = Class.new(SweetNotifications::LogSubscriber, &block)
     controller_runtime = self.controller_runtime(label, log_subscriber)
-    if Rails.respond_to?(:application) && Rails.application && Rails.application.initialized?
+    if rails_initialized?
       initialize_rails(name, log_subscriber, controller_runtime)
       [nil, log_subscriber]
     else
       [railtie(name, log_subscriber, controller_runtime), log_subscriber]
     end
   end
+
+  def self.rails_initialized?
+    Rails.respond_to?(:application) &&
+      Rails.application &&
+      Rails.application.initialized?
+  end
+
+  private_class_method :rails_initialized?
 end
