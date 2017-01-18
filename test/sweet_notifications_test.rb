@@ -19,6 +19,12 @@ describe SweetNotifications do
   include ActiveSupport::LogSubscriber::TestHelper
   tests SweetNotificationsController
 
+  before do
+    ActionController::TestRoutes.draw do
+      resources :sweet_notifications
+    end
+  end
+
   describe '.subscribe' do
     it 'creates a railtie' do
       railtie, = SweetNotifications.subscribe 'railtie_create' do

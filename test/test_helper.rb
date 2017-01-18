@@ -33,9 +33,6 @@ end
 
 module ActionController
   TestRoutes = ActionDispatch::Routing::RouteSet.new
-  TestRoutes.draw do
-    match ':controller(/:action)', via: [:all]
-  end
 
   class Base
     include ActionController::Testing

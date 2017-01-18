@@ -40,6 +40,10 @@ describe SweetNotifications::ControllerRuntime do
   tests LogSubscribersController
 
   before do
+    ActionController::TestRoutes.draw do
+      resources :log_subscribers
+    end
+
     @old_logger = ActionController::Base.logger
     ActionController::LogSubscriber.attach_to :action_controller
   end
