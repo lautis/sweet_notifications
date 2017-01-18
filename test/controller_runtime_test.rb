@@ -27,8 +27,7 @@ describe SweetNotifications::ControllerRuntime do
     private
 
     def render_text(text)
-      rails_gem = Gem.loaded_specs['rails']
-      if rails_gem && rails_gem.version < Gem::Version.new('4.2')
+      if rails_version?('~>4.1.0')
         render text: text
       else
         render plain: text
@@ -40,8 +39,11 @@ describe SweetNotifications::ControllerRuntime do
   tests LogSubscribersController
 
   before do
-    ActionController::TestRoutes.draw do
-      resources :log_subscribers
+    require 'rails'
+    if rails_version?('>= 5.0')
+      ActionController::TestRoutes.draw do
+        resources :log_subscribers
+      end
     end
 
     @old_logger = ActionController::Base.logger

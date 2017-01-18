@@ -16,6 +16,14 @@ require 'active_support/log_subscriber/test_helper'
 require 'active_support/core_ext/string'
 require 'securerandom'
 
+module RailsVersion
+  extend self
+  def rails_version?(constraint)
+    gem_spec = Gem.loaded_specs['actionview']
+    gem_spec && Gem::Requirement.new(constraint).satisfied_by?(gem_spec.version)
+  end
+end
+
 class ActiveSupport::TestCase
   class << self
     remove_method :describe if method_defined? :describe
@@ -25,6 +33,8 @@ class ActiveSupport::TestCase
   register_spec_type(/SweetNotifications$/, ActionController::TestCase)
   register_spec_type(/ControllerRuntime$/, ActionController::TestCase)
   register_spec_type(self)
+
+  include RailsVersion
 end
 
 if ActiveSupport::TestCase.respond_to?(:test_order=)
@@ -32,11 +42,19 @@ if ActiveSupport::TestCase.respond_to?(:test_order=)
 end
 
 module ActionController
+  extend RailsVersion
   TestRoutes = ActionDispatch::Routing::RouteSet.new
+
+  if rails_version?('< 5.0')
+    TestRoutes.draw do
+      match ':controller(/:action)', via: [:all]
+    end
+  end
 
   class Base
     include ActionController::Testing
     include TestRoutes.url_helpers
+    include RailsVersion
   end
 
   class ActionController::TestCase

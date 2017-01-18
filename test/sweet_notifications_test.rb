@@ -6,8 +6,7 @@ class SweetNotificationsController < ActionController::Base
       'ok'
     end
 
-    rails_gem = Gem.loaded_specs['rails']
-    if rails_gem && rails_gem.version < Gem::Version.new('4.2')
+    if rails_version?('~>4.1.0')
       render text: 'ok'
     else
       render plain: 'ok'
@@ -20,8 +19,10 @@ describe SweetNotifications do
   tests SweetNotificationsController
 
   before do
-    ActionController::TestRoutes.draw do
-      resources :sweet_notifications
+    if rails_version?('>= 5.0')
+      ActionController::TestRoutes.draw do
+        resources :sweet_notifications
+      end
     end
   end
 
