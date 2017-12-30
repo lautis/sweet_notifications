@@ -28,3 +28,6 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false

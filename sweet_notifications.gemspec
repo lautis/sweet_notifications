@@ -30,5 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "yard", "~> 0.9.7"
   spec.add_development_dependency "appraisal", "~> 2.0"
   spec.add_development_dependency "simplecov", "~> 0.12.0"
-  spec.add_development_dependency "rubocop", "~> 0.46.0"
+  spec.add_development_dependency "rubocop", "~> 0.52.1"
 end
