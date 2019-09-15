@@ -83,7 +83,7 @@ describe SweetNotifications::LogSubscriber do
 
       first.runtime += 100
       second.runtime += 200
-      refute_equal first.runtime, second.runtime
+      assert_not_equal first.runtime, second.runtime
     end
   end
 
@@ -135,14 +135,14 @@ describe SweetNotifications::LogSubscriber do
       subject.colorize_logging = true
       odd = subject.message(event, 'Label', 'body')
       even = subject.message(event, 'Label', 'body')
-      assert !odd.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
+      assert_not odd.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
       assert even.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
     end
 
     it 'does not use colors when setting is disabled' do
       subject.colorize_logging = false
       message = subject.message(event, 'Label', 'body')
-      assert !message.include?(ActiveSupport::LogSubscriber::CYAN)
+      assert_not message.include?(ActiveSupport::LogSubscriber::CYAN)
     end
   end
 end
