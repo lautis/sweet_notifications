@@ -78,7 +78,7 @@ describe SweetNotifications::ControllerRuntime do
     it 'appends non-zero runtime' do
       post :create, params: { test: 1 }
       wait
-      expected_message = /\(Views: [\d.]+ms \| Test: 100.0ms\)/
+      expected_message = /\(Views: [\d.]+ms \| Test: 100.0ms/
       assert_match(expected_message, @logger.logged(:info)[2])
     end
 
@@ -86,14 +86,14 @@ describe SweetNotifications::ControllerRuntime do
       TestLogSubscriber.runtime += 1000
       post :create, params: { test: 1 }
       wait
-      expected_message = /\(Views: [\d.]+ms \| Test: 100.0ms\)/
+      expected_message = /\(Views: [\d.]+ms \| Test: 100.0ms/
       assert_match(expected_message, @logger.logged(:info)[2])
     end
 
     it 'includes runtime after render' do
       post :destroy, params: { id: 1 }
       wait
-      expected_message = /\(Views: [\d.]+ms \| Test: 55.0ms\)/
+      expected_message = /\(Views: [\d.]+ms \| Test: 55.0ms/
       assert_match(expected_message, @logger.logged(:info)[2])
     end
   end
