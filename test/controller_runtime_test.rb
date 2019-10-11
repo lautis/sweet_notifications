@@ -6,7 +6,7 @@ describe SweetNotifications::ControllerRuntime do
 
   ControllerRuntime = SweetNotifications.controller_runtime('Test',
                                                             TestLogSubscriber)
-  ActionController::Base.send :include, ControllerRuntime
+  ActionController::Base.include ControllerRuntime
 
   class LogSubscribersController < ActionController::Base
     def create
@@ -55,11 +55,11 @@ describe SweetNotifications::ControllerRuntime do
     ActionController::Base.logger = @old_logger
   end
 
-  # rubocop:disable AccessorMethodName
+  # rubocop:disable Naming/AccessorMethodName
   def set_logger(logger)
     ActionController::Base.logger = logger
   end
-  # rubocop:enable AccessorMethodName
+  # rubocop:enable Naming/AccessorMethodName
 
   describe '.log_process_action' do
     it 'emits runtime to log messages' do
