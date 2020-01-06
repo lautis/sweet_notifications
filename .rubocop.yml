@@ -11,6 +11,9 @@ AllCops:
 Rails:
   Enabled: true
 
+Rails/ApplicationController:
+  Enabled: false
+
 Rails/AssertNot:
   Enabled: false
 
@@ -20,19 +23,19 @@ Rails/RefuteMethods:
 Bundler/OrderedGems:
   Enabled: false
 
-ClassAndModuleChildren:
+Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
 
-Documentation:
+Style/Documentation:
   Include:
     - lib/**/*.rb
 
-MethodLength:
+Metrics/MethodLength:
   Exclude:
     - lib/sweet_notifications/controller_runtime.rb
 
-ModuleFunction:
+Style/ModuleFunction:
   Enabled: false
 
 Metrics/AbcSize:
