@@ -62,12 +62,6 @@ Style/StringConcatenation:
 Style/IfUnlessModifier:
   Enabled: false
 
-Lint/MissingSuper:
-  Enabled: false
-
-Naming/MemoizedInstanceVariableName:
-  Enabled: false
-
 Lint/DuplicateRegexpCharacterClassElement:
   Enabled: true
 Lint/EmptyBlock:

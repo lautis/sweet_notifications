@@ -78,6 +78,7 @@ module SweetNotifications
       protected
 
       def inherited(base)
+        super
         base.class_eval do
           @name ||= SecureRandom.hex
         end
