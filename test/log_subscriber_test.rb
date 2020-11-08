@@ -135,14 +135,14 @@ describe SweetNotifications::LogSubscriber do
       subject.colorize_logging = true
       odd = subject.message(event, 'Label', 'body')
       even = subject.message(event, 'Label', 'body')
-      assert !odd.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
+      assert odd.exclude?(ActiveSupport::LogSubscriber::BOLD + 'body')
       assert even.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
     end
 
     it 'does not use colors when setting is disabled' do
       subject.colorize_logging = false
       message = subject.message(event, 'Label', 'body')
-      assert !message.include?(ActiveSupport::LogSubscriber::CYAN)
+      assert message.exclude?(ActiveSupport::LogSubscriber::CYAN)
     end
   end
 end
