@@ -6,7 +6,7 @@ AllCops:
     - lib/sweet_notifications/version.rb
     - "vendor/**/*"
     - "gemfiles/vendor/**/*"
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
 
 Rails:
   Enabled: true
@@ -21,6 +21,9 @@ Rails/RefuteMethods:
   Enabled: false
 
 Bundler/OrderedGems:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
   Enabled: false
 
 Style/ClassAndModuleChildren:
@@ -52,3 +55,36 @@ Style/StringLiterals:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/StringConcatenation:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Lint/DuplicateRegexpCharacterClassElement:
+  Enabled: true
+Lint/EmptyBlock:
+  Enabled: true
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: true
+Lint/ToEnumArguments:
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator:
+  Enabled: true
+Style/ArgumentsForwarding:
+  Enabled: true
+Style/CollectionCompact:
+  Enabled: true
+Style/DocumentDynamicEvalDefinition:
+  Enabled: true
+Style/NegatedIfElseCondition:
+  Enabled: true
+Style/SwapValues:
+  Enabled: true

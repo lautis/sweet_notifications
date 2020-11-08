@@ -29,6 +29,7 @@ describe SweetNotifications do
   describe '.subscribe' do
     it 'creates a railtie' do
       railtie, = SweetNotifications.subscribe 'railtie_create' do
+        # empty block
       end
       assert railtie < Rails::Railtie
     end
