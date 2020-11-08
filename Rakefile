@@ -1,5 +1,6 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
+require 'rubocop/rake_task'
 require 'yard'
 
 Rake::TestTask.new do |t|
@@ -11,11 +12,7 @@ YARD::Rake::YardocTask.new do |t|
   t.files = ['lib/**/*.rb']
 end
 
-begin
-  require 'rubocop/rake_task'
-  desc 'Check for code style'
-  RuboCop::RakeTask.new
-  task default: %i[test rubocop]
-rescue LoadError
-  task default: %i[test]
-end
+desc 'Check for code style'
+RuboCop::RakeTask.new
+
+task default: %i[test rubocop]
