@@ -57,11 +57,8 @@ describe SweetNotifications do
     end
 
     it 'binds to current Rails app directly when the app is initialized' do
-      module ::Rails
-        def self.application
-          Struct.new(:initialized?).new(true)
-        end
-      end
+      mock_app = Struct.new(:initialized?).new(true)
+      Rails.instance_variable_set(:@application, mock_app)
 
       railtie, = SweetNotifications.subscribe 'sweet' do
         event :direct do |event|
