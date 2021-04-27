@@ -20,9 +20,6 @@ jobs:
          - 2.7
          - 3.0
          - jruby
-        include:
-        - ruby: 3.0
-          gemfile: gemfiles/rails_head.gemfile
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
