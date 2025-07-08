@@ -135,8 +135,13 @@ describe SweetNotifications::LogSubscriber do
       subject.colorize_logging = true
       odd = subject.message(event, 'Label', 'body')
       even = subject.message(event, 'Label', 'body')
-      assert odd.exclude?(ActiveSupport::LogSubscriber::BOLD + 'body')
-      assert even.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
+      if Gem::Version.new(ActiveSupport::VERSION::STRING) >= Gem::Version.new('7.1.0')
+        assert odd.exclude?("\e[#{ActiveSupport::LogSubscriber::MODES[:bold]}m" + 'body')
+        assert even.include?("\e[#{ActiveSupport::LogSubscriber::MODES[:bold]}m" + 'body')
+      else
+        assert odd.exclude?(ActiveSupport::LogSubscriber::BOLD + 'body')
+        assert even.include?(ActiveSupport::LogSubscriber::BOLD + 'body')
+      end
     end
 
     it 'does not use colors when setting is disabled' do
