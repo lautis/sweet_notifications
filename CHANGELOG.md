@@ -1,3 +1,7 @@
+## 1.1.2 (11 July 2025)
+
+- fix log subscriber for Rails >= 7.1 (#4)
+
 ## 1.1.1 (27 April 2021)
 
 - loosen Ruby version requirement to allow Ruby 3 (#3)
