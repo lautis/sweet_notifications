@@ -1,3 +1,7 @@
+## 1.1.1 (27 April 2021)
+
+- loosen Ruby version requirement to allow Ruby 3 (#3)
+
 ## 1.1.0 (8 November 2020)
 
 - drop support for old Ruby and Rails versions
