@@ -13,7 +13,7 @@ describe SweetNotifications::Railtie do
     end
 
     it 'attaches log subscriber to namespace' do
-      mock = MiniTest::Mock.new
+      mock = Minitest::Mock.new
       mock.expect :attach_to, true, [:log_subscriber]
       railtie = SweetNotifications.railtie('log_subscriber', mock, Module.new)
       railtie.run_initializers

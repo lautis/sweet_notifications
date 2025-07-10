@@ -31,9 +31,9 @@ module SweetNotifications
 
       format(
         '  %s (%.2fms)  %s',
-        color(label, label_color, true),
+        color(label, label_color, self.class.as_7_1_or_upper? ? { bold: true } : true),
         event.duration,
-        color(body, nil, !@odd)
+        color(body, nil, self.class.as_7_1_or_upper? ? { bold: !@odd } : !@odd)
       )
     end
 
@@ -73,6 +73,13 @@ module SweetNotifications
           self.class.runtime += event.duration if runtime
           instance_exec(event, &block) if block
         end
+      end
+
+      def as_7_1_or_upper?
+        return @as_7_1_or_upper if defined?(@as_7_1_or_upper)
+
+        @as_7_1_or_upper =
+          Gem::Version.new(ActiveSupport::VERSION::STRING) >= Gem::Version.new('7.1.0')
       end
 
       protected
