@@ -18,6 +18,7 @@ jobs:
         ruby:
           - 3.3
           - 3.4
+          - 4.0
           - jruby
         include:
           - gemfile: gemfiles/rails_5.2.gemfile
